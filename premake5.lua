@@ -5,6 +5,11 @@ workspace "Brynhild"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDirectories = {}
+IncludeDirectories["GLFW"] = "Brynhild/vendor/GLFW/include"
+
+include "Brynhild/vendor/GLFW"
+
 project "Brynhild"
     location "Brynhild"
     kind "SharedLib"
@@ -12,9 +17,19 @@ project "Brynhild"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+    pchheader "PreCompiledHeader.h"
+    pchsource "Brynhild/src/PreCompiledHeader.cpp"
+
     files { "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp" }
 
-    includedirs "%{prj.name}/vendor/spdlog/include"
+    includedirs { "%{prj.name}/vendor/spdlog/include", "%{prj.name}/src", "%{IncludeDirectories.GLFW}" }
+    links{
+      "GLFW",
+      "opengl32.lib",
+      "user32.lib",
+      "gdi32.lib",
+      "shell32.lib"
+    }
     buildoptions "/utf-8"
 
     filter "system:windows"
@@ -29,12 +44,14 @@ project "Brynhild"
         }
 
     filter "configurations:Debug"
-        defines "BRYN_DEBUG"
-        symbols "On"
+        defines { "BRYN_DEBUG", "BRYN_ENABLE_ASSERTS" }
+        symbols "On" 
+        runtime "Debug"
     
     filter "configurations:Release"
         defines "BRYN_RELEASE"
         optimize "On"
+        runtime "Release"
         
     filter "configurations:Dist"
         defines "BRYN_DIST"
@@ -52,12 +69,17 @@ project "Sandbox"
 
     includedirs {
         "Brynhild/vendor/spdlog/include",
-        "Brynhild/src"
+        "Brynhild/src",
     }
 
     buildoptions "/utf-8"
 
-    defines { "BRYN_PLATFORM_WINDOWS" }
+    filter "system:windows"
+        cppdialect "C++17"
+        staticruntime "on"
+        systemversion "latest"
+        
+        defines { "BRYN_PLATFORM_WINDOWS" }
 
     filter "configurations:Debug"
         defines "BRYN_DEBUG"

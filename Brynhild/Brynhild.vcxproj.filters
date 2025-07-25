@@ -4,6 +4,15 @@
     <Filter Include="Brynhild">
       <UniqueIdentifier>{E1C95CCE-CD96-B7D9-F6AF-A581E2DBEC67}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Brynhild\Event">
+      <UniqueIdentifier>{F26FC4B7-DE3D-B8BD-C7D1-28E4B33E9422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brynhild\Platform">
+      <UniqueIdentifier>{55B3C62A-C1C9-C4C0-0A41-50E276969548}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brynhild\Platform\Windows">
+      <UniqueIdentifier>{8FE228C7-FBA4-5C51-4455-EBDDB056352F}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Brynhild.h" />
@@ -16,9 +25,31 @@
     <ClInclude Include="src\Brynhild\EntryPoint.h">
       <Filter>Brynhild</Filter>
     </ClInclude>
+    <ClInclude Include="src\Brynhild\Event\ApplicationEvent.h">
+      <Filter>Brynhild\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Brynhild\Event\Event.h">
+      <Filter>Brynhild\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Brynhild\Event\EventLog.h">
+      <Filter>Brynhild\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Brynhild\Event\KeyEvent.h">
+      <Filter>Brynhild\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Brynhild\Event\MouseEvent.h">
+      <Filter>Brynhild\Event</Filter>
+    </ClInclude>
     <ClInclude Include="src\Brynhild\Log.h">
       <Filter>Brynhild</Filter>
     </ClInclude>
+    <ClInclude Include="src\Brynhild\Platform\Windows\WindowsWindow.h">
+      <Filter>Brynhild\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Brynhild\Window.h">
+      <Filter>Brynhild</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PreCompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Brynhild\Application.cpp">
@@ -27,5 +58,9 @@
     <ClCompile Include="src\Brynhild\Log.cpp">
       <Filter>Brynhild</Filter>
     </ClCompile>
+    <ClCompile Include="src\Brynhild\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Brynhild\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PreCompiledHeader.cpp" />
   </ItemGroup>
 </Project>

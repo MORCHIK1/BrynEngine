@@ -1,3 +1,4 @@
+#include "PreCompiledHeader.h"
 #include "Log.h"
 
 namespace Brynhild {
