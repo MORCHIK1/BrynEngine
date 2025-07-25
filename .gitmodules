@@ -1,0 +1,3 @@
+[submodule "Brynhild/vendor/GLFW"]
+	path = Brynhild/vendor/GLFW
+	url = https://github.com/MORCHIK1/glfw
