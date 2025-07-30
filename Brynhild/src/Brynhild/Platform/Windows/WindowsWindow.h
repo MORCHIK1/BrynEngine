@@ -2,7 +2,9 @@
 
 #include <GLFW/glfw3.h>
 #include "Brynhild/Event/EventLog.h"
-
+#include "Brynhild/Event/ApplicationEvent.h"
+#include "Brynhild/Event/MouseEvent.h"
+#include "Brynhild/Event/KeyEvent.h"
 #include "Brynhild/Window.h"
 
 namespace Brynhild {

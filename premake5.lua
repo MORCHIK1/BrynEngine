@@ -46,6 +46,7 @@ project "Brynhild"
     filter "configurations:Debug"
         defines { "BRYN_DEBUG", "BRYN_ENABLE_ASSERTS" }
         symbols "On" 
+        staticruntime "off"
         runtime "Debug"
     
     filter "configurations:Release"

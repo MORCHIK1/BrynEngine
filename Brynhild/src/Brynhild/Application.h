@@ -15,7 +15,10 @@ namespace Brynhild
 
     void Run();
 
+    void OnEvent(Event& event);
   private:
+    bool OnWindowClosedEvent(WindowCloseEvent& event);
+
     std::unique_ptr<Window> m_Window;
     bool m_Running = true;
   };

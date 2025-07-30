@@ -5,6 +5,7 @@
 
 namespace Brynhild {
   //WINDOW EVENT CLASSES
+  //Existing Events for Window: WindowClose, WindowResize, WindowLostFocus, WindowMoved, WindowFocus
   class BRYN_API WindowCloseEvent : public Event {
   public:
     WindowCloseEvent(){}
