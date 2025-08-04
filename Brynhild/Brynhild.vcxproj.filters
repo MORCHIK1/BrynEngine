@@ -40,6 +40,12 @@
     <ClInclude Include="src\Brynhild\Event\MouseEvent.h">
       <Filter>Brynhild\Event</Filter>
     </ClInclude>
+    <ClInclude Include="src\Brynhild\Layer.h">
+      <Filter>Brynhild</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Brynhild\LayerStack.h">
+      <Filter>Brynhild</Filter>
+    </ClInclude>
     <ClInclude Include="src\Brynhild\Log.h">
       <Filter>Brynhild</Filter>
     </ClInclude>
@@ -53,6 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Brynhild\Application.cpp">
+      <Filter>Brynhild</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Brynhild\Layer.cpp">
+      <Filter>Brynhild</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Brynhild\LayerStack.cpp">
       <Filter>Brynhild</Filter>
     </ClCompile>
     <ClCompile Include="src\Brynhild\Log.cpp">

@@ -45,18 +45,21 @@ project "Brynhild"
 
     filter "configurations:Debug"
         defines { "BRYN_DEBUG", "BRYN_ENABLE_ASSERTS" }
+        buildoptions "/MDd"
         symbols "On" 
-        staticruntime "off"
         runtime "Debug"
     
     filter "configurations:Release"
         defines "BRYN_RELEASE"
+        buildoptions "/MD"
         optimize "On"
         runtime "Release"
         
     filter "configurations:Dist"
         defines "BRYN_DIST"
+        buildoptions "/MD"
         optimize "On"
+
 
 project "Sandbox"
     location "Sandbox"
@@ -84,12 +87,15 @@ project "Sandbox"
 
     filter "configurations:Debug"
         defines "BRYN_DEBUG"
+        buildoptions "/MDd"
         symbols "On"
     
     filter "configurations:Release"
         defines "BRYN_RELEASE"
+        buildoptions "/MD"
         optimize "On"
         
     filter "configurations:Dist"
         defines "BRYN_DIST"
+        buildoptions "/MD"
         optimize "On"

@@ -41,6 +41,8 @@ namespace Brynhild {
   class Event {
     friend class EventDispatcher;
   public:
+    bool handled = false;
+
     virtual EventType GetEventType() const = 0;
     virtual const char* GetName() const = 0;
     virtual EventCategory GetCategoryFlags() const = 0;
@@ -52,8 +54,6 @@ namespace Brynhild {
       return (category & GetCategoryFlags()) != EventCategory::None; //Categories are set with left bitwise shift operation, so we are using AND(&) to find if it's in Category. 
       //New overloaded & returns EventCategory, so we have to compare it to EventCategory::None and not to 0
     }
-  protected:
-    bool m_Handled = false;
   };
 
   class EventDispatcher {
@@ -68,8 +68,8 @@ namespace Brynhild {
       if (m_Event.GetEventType() == T::GetStaticType()) {
         //(T*) is a cast to a certain event which we are sure to get thanks to our if statement
         BRYN_CORE_INFO("Event {} dispatch", m_Event.GetName())
-        m_Event.m_Handled = func(*(T*)&m_Event);
-        BRYN_CORE_INFO("Dispatcher of {0} status is {1}", m_Event.GetName(), m_Event.m_Handled)
+        m_Event.handled = func(*(T*)&m_Event);
+        BRYN_CORE_INFO("Dispatcher of {0} status is {1}", m_Event.GetName(), m_Event.handled)
         return true;
       }
       return false;
