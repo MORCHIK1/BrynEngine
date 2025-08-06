@@ -7,6 +7,9 @@
     <Filter Include="Brynhild\Event">
       <UniqueIdentifier>{F26FC4B7-DE3D-B8BD-C7D1-28E4B33E9422}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Brynhild\ImGui">
+      <UniqueIdentifier>{CB6307B8-B731-FBBD-A0C5-6BE48C32D722}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Brynhild\Platform">
       <UniqueIdentifier>{55B3C62A-C1C9-C4C0-0A41-50E276969548}</UniqueIdentifier>
     </Filter>
@@ -40,6 +43,9 @@
     <ClInclude Include="src\Brynhild\Event\MouseEvent.h">
       <Filter>Brynhild\Event</Filter>
     </ClInclude>
+    <ClInclude Include="src\Brynhild\ImGui\ImGuiLayer.h">
+      <Filter>Brynhild\ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="src\Brynhild\Layer.h">
       <Filter>Brynhild</Filter>
     </ClInclude>
@@ -56,10 +62,17 @@
       <Filter>Brynhild</Filter>
     </ClInclude>
     <ClInclude Include="src\PreCompiledHeader.h" />
+    <ClInclude Include="src\Brynhild\KeyCode.h" />
+    <ClInclude Include="src\Brynhild\MouseButtonsCode.h" />
+    <ClInclude Include="src\Brynhild\OpenGL\imguiOpenGL.h" />
+    <ClInclude Include="src\Brynhild\OpenGL\imguiGLFW.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Brynhild\Application.cpp">
       <Filter>Brynhild</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Brynhild\ImGui\ImGuiLayer.cpp">
+      <Filter>Brynhild\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Brynhild\Layer.cpp">
       <Filter>Brynhild</Filter>
@@ -74,5 +87,7 @@
       <Filter>Brynhild\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\PreCompiledHeader.cpp" />
+    <ClCompile Include="src\Brynhild\OpenGL\imguiOpenGL.cpp" />
+    <ClCompile Include="src\Brynhild\OpenGL\imguiGLFW.cpp" />
   </ItemGroup>
 </Project>

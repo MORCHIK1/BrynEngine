@@ -48,7 +48,7 @@ namespace Brynhild {
 
   class BRYN_API MouseButtonEvent : public Event {
   public:
-    inline float GetMouseButton() const { return m_Button; }
+    inline int GetMouseButton() const { return m_Button; }
 
     EVENT_CLASS_CATEGORY(EventCategory::EventCategoryMouse | EventCategory::EventCategoryInput);
 
@@ -61,7 +61,7 @@ namespace Brynhild {
   public:
     MouseButtonPressedEvent(int button) : MouseButtonEvent(button) {}
 
-    inline float GetMouseButton() const { return m_Button; }
+    inline int GetMouseButton() const { return m_Button; }
 
     std::string ToString() const override {
       std::stringstream ss;
@@ -76,7 +76,7 @@ namespace Brynhild {
   public:
     MouseButtonReleasedEvent(int button) : MouseButtonEvent(button) {}
 
-    inline float GetMouseButton() const { return m_Button; }
+    inline int GetMouseButton() const { return m_Button; }
 
     std::string ToString() const override {
       std::stringstream ss;

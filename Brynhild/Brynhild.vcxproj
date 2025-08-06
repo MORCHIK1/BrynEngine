@@ -80,11 +80,11 @@
       <PrecompiledHeaderFile>PreCompiledHeader.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>BRYN_PLATFORM_WINDOWS;BRYN_BUILD_DLL;BRYN_DEBUG;BRYN_ENABLE_ASSERTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalOptions>/utf-8 /MDd %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -95,7 +95,7 @@
       <ImportLibrary>..\bin\Debug-windows-x86_64\Brynhild\Brynhild.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>copy /B /Y ..\bin\Debug-windows-x86_64\Brynhild\Brynhild.dll ..\bin\Debug-windows-x86_64\Sandbox</Command>
+      <Command>IF EXIST ..\bin\Debug-windows-x86_64\Brynhild\Brynhild.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Brynhild\Brynhild.dll "..\bin\Debug-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Brynhild\Brynhild.dll "..\bin\Debug-windows-x86_64\Sandbox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -104,14 +104,14 @@
       <PrecompiledHeaderFile>PreCompiledHeader.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>BRYN_PLATFORM_WINDOWS;BRYN_BUILD_DLL;BRYN_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/utf-8 /MD %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -123,7 +123,7 @@
       <ImportLibrary>..\bin\Release-windows-x86_64\Brynhild\Brynhild.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>copy /B /Y ..\bin\Release-windows-x86_64\Brynhild\Brynhild.dll ..\bin\Release-windows-x86_64\Sandbox</Command>
+      <Command>IF EXIST ..\bin\Release-windows-x86_64\Brynhild\Brynhild.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Brynhild\Brynhild.dll "..\bin\Release-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Brynhild\Brynhild.dll "..\bin\Release-windows-x86_64\Sandbox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -132,14 +132,14 @@
       <PrecompiledHeaderFile>PreCompiledHeader.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>BRYN_PLATFORM_WINDOWS;BRYN_BUILD_DLL;BRYN_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/utf-8 /MD %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -151,7 +151,7 @@
       <ImportLibrary>..\bin\Dist-windows-x86_64\Brynhild\Brynhild.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>copy /B /Y ..\bin\Dist-windows-x86_64\Brynhild\Brynhild.dll ..\bin\Dist-windows-x86_64\Sandbox</Command>
+      <Command>IF EXIST ..\bin\Dist-windows-x86_64\Brynhild\Brynhild.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\Brynhild\Brynhild.dll "..\bin\Dist-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\Brynhild\Brynhild.dll "..\bin\Dist-windows-x86_64\Sandbox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -164,18 +164,26 @@
     <ClInclude Include="src\Brynhild\Event\EventLog.h" />
     <ClInclude Include="src\Brynhild\Event\KeyEvent.h" />
     <ClInclude Include="src\Brynhild\Event\MouseEvent.h" />
+    <ClInclude Include="src\Brynhild\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Brynhild\KeyCode.h" />
     <ClInclude Include="src\Brynhild\Layer.h" />
     <ClInclude Include="src\Brynhild\LayerStack.h" />
     <ClInclude Include="src\Brynhild\Log.h" />
+    <ClInclude Include="src\Brynhild\MouseButtonsCode.h" />
+    <ClInclude Include="src\Brynhild\OpenGL\imguiGLFW.h" />
+    <ClInclude Include="src\Brynhild\OpenGL\imguiOpenGL.h" />
     <ClInclude Include="src\Brynhild\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Brynhild\Window.h" />
     <ClInclude Include="src\PreCompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Brynhild\Application.cpp" />
+    <ClCompile Include="src\Brynhild\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Brynhild\Layer.cpp" />
     <ClCompile Include="src\Brynhild\LayerStack.cpp" />
     <ClCompile Include="src\Brynhild\Log.cpp" />
+    <ClCompile Include="src\Brynhild\OpenGL\imguiGLFW.cpp" />
+    <ClCompile Include="src\Brynhild\OpenGL\imguiOpenGL.cpp" />
     <ClCompile Include="src\Brynhild\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\PreCompiledHeader.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -184,6 +192,12 @@
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">
       <Project>{154B857C-0182-860D-AA6E-6C109684020F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vendor\glad\glad.vcxproj">
+      <Project>{DD62977C-C999-980D-7286-7E105E9C140F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vendor\imgui\imgui.vcxproj">
+      <Project>{0098A80F-6CAC-D0C0-352E-7420A101CDF1}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

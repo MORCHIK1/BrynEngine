@@ -1,4 +1,4 @@
-#include <PreCompiledHeader.h>
+#include "PreCompiledHeader.h"
 #include "WindowsWindow.h"
 
 namespace Brynhild {
@@ -35,6 +35,12 @@ namespace Brynhild {
 
     m_Window = glfwCreateWindow(static_cast<int>(m_Data.Width), static_cast<int>(m_Data.Height), m_Data.Title.c_str(), nullptr, nullptr);
     glfwMakeContextCurrent(m_Window);
+
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+      BRYN_CORE_ERROR("Failed to initialize GLAD");
+    }
+
     glfwSetWindowUserPointer(m_Window, &m_Data);
     SetVSync(true);
 
@@ -92,6 +98,13 @@ namespace Brynhild {
       });
 
     //Setting GLFW callbacks for KeyEvents
+    glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int key) {
+      WindowData& data = *(static_cast<WindowData*>(glfwGetWindowUserPointer(window)));
+      
+      KeyTypedEvent event(key);
+      data.EventCallback(event);
+      });
+
     glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
       WindowData& data = *(static_cast<WindowData*>(glfwGetWindowUserPointer(window)));
 

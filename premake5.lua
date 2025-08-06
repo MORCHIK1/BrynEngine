@@ -2,13 +2,18 @@ workspace "Brynhild"
     architecture "x64"
     configurations {"Debug", "Release", "Dist"}
     startproject "Sandbox"
+    staticruntime "off"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDirectories = {}
 IncludeDirectories["GLFW"] = "Brynhild/vendor/GLFW/include"
+IncludeDirectories["glad"] = "Brynhild/vendor/glad/include"
+IncludeDirectories["imgui"] = "Brynhild/vendor/imgui"
 
 include "Brynhild/vendor/GLFW"
+include "Brynhild/vendor/glad"
+include "Brynhild/vendor/imgui"
 
 project "Brynhild"
     location "Brynhild"
@@ -22,9 +27,17 @@ project "Brynhild"
 
     files { "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp" }
 
-    includedirs { "%{prj.name}/vendor/spdlog/include", "%{prj.name}/src", "%{IncludeDirectories.GLFW}" }
+    includedirs { 
+      "%{prj.name}/vendor/spdlog/include", 
+      "%{prj.name}/src", 
+      "%{IncludeDirectories.GLFW}",
+      "%{IncludeDirectories.glad}",
+      "%{IncludeDirectories.imgui}"
+    }
     links{
       "GLFW",
+      "glad",
+      "imgui",
       "opengl32.lib",
       "user32.lib",
       "gdi32.lib",
@@ -34,31 +47,28 @@ project "Brynhild"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "on"
         systemversion "latest"
         
         defines { "BRYN_PLATFORM_WINDOWS", "BRYN_BUILD_DLL" }
         
         postbuildcommands {
-            ("{COPYFILE} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+            ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
         }
 
     filter "configurations:Debug"
         defines { "BRYN_DEBUG", "BRYN_ENABLE_ASSERTS" }
-        buildoptions "/MDd"
         symbols "On" 
         runtime "Debug"
     
     filter "configurations:Release"
         defines "BRYN_RELEASE"
-        buildoptions "/MD"
         optimize "On"
         runtime "Release"
         
     filter "configurations:Dist"
         defines "BRYN_DIST"
-        buildoptions "/MD"
         optimize "On"
+        runtime "Release"
 
 
 project "Sandbox"
@@ -80,22 +90,21 @@ project "Sandbox"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "on"
         systemversion "latest"
         
         defines { "BRYN_PLATFORM_WINDOWS" }
 
     filter "configurations:Debug"
         defines "BRYN_DEBUG"
-        buildoptions "/MDd"
         symbols "On"
+        runtime "Debug"
     
     filter "configurations:Release"
         defines "BRYN_RELEASE"
-        buildoptions "/MD"
         optimize "On"
+        runtime "Release"
         
     filter "configurations:Dist"
         defines "BRYN_DIST"
-        buildoptions "/MD"
         optimize "On"
+        runtime "Release"

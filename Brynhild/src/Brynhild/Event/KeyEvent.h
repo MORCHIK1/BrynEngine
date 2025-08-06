@@ -4,7 +4,7 @@
 #include <sstream>
 
 namespace Brynhild {
-
+  //Key pressed event, key released event
   class BRYN_API KeyEvent : public Event {
   public:
     inline int GetKeyCode() const{ return m_KeyCode; }
@@ -46,4 +46,16 @@ namespace Brynhild {
     EVENT_CLASS_TYPE(KeyReleased);
   };
 
+  class BRYN_API KeyTypedEvent : public KeyEvent {
+  public:
+    KeyTypedEvent(int keycode) : KeyEvent(keycode) {}
+
+    std::string ToString() const override {
+      std::stringstream ss;
+      ss << "Key Typed Event. Key: " << m_KeyCode;
+      return ss.str();
+    }
+
+    EVENT_CLASS_TYPE(KeyTyped);
+  };
 }

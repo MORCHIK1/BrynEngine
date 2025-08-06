@@ -5,11 +5,9 @@ public:
   ExampleLayer() : Layer("Example") {};
 
   void OnUpdate() override {
-    BRYN_CLIENT_INFO("UPDATE");
   }
 
   void OnEvent(Brynhild::Event& event) override {
-    BRYN_CLIENT_TRACE("{0}", event);
   }
 };
 
@@ -19,6 +17,7 @@ public:
   Sandbox() 
   {
     PushLayer(new ExampleLayer());
+    PushOverlay(new Brynhild::ImGuiLayer());
   }
 
   ~Sandbox() 
