@@ -15,17 +15,10 @@ namespace Brynhild {
 
     void OnAttach() override;
     void OnDetach() override;
-    void OnUpdate() override;
-    void OnEvent(Event& event) override;
 
-    bool OnKeyPressedEvent(KeyPressedEvent& event);
-    bool OnKeyReleasedEvent(KeyReleasedEvent& event);
-    bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& event);
-    bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& event);
-    bool OnMouseMovedEvent(MouseMovedEvent& event);
-    bool OnMouseScrolledEvent(MouseScrolledEvent& event);
-    bool OnWindowResizeEvent(WindowResizeEvent& event);
-  private:
-    float m_Time = 0.0f;
+    void OnImGuiDraw() override;
+
+    void Begin();
+    void End();
   };
 }

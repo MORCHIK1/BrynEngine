@@ -22,7 +22,7 @@ namespace Brynhild {
 
   private:
     std::vector<Layer*> m_Layers;
-    std::vector<Layer*>::iterator m_LayersInsert;
+    unsigned int m_LayersIndex = 0;
   };
 }
 

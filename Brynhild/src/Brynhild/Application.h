@@ -4,6 +4,7 @@
 #include "Brynhild/Event/ApplicationEvent.h"
 #include "Brynhild/LayerStack.h"
 #include "Event/EventLog.h"
+#include "ImGui/ImGuiLayer.h"
 #include "Window.h"
 
 namespace Brynhild 
@@ -28,6 +29,7 @@ namespace Brynhild
     bool OnWindowClosedEvent(WindowCloseEvent& event);
 
     std::unique_ptr<Window> m_Window;
+    ImGuiLayer* m_ImGuiLayer;
     bool m_Running = true;
     LayerStack m_LayerStack;
 

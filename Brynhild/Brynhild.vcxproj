@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>PreCompiledHeader.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>BRYN_PLATFORM_WINDOWS;BRYN_BUILD_DLL;BRYN_DEBUG;BRYN_ENABLE_ASSERTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -104,7 +104,7 @@
       <PrecompiledHeaderFile>PreCompiledHeader.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>BRYN_PLATFORM_WINDOWS;BRYN_BUILD_DLL;BRYN_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -132,7 +132,7 @@
       <PrecompiledHeaderFile>PreCompiledHeader.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>BRYN_PLATFORM_WINDOWS;BRYN_BUILD_DLL;BRYN_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -170,20 +170,17 @@
     <ClInclude Include="src\Brynhild\LayerStack.h" />
     <ClInclude Include="src\Brynhild\Log.h" />
     <ClInclude Include="src\Brynhild\MouseButtonsCode.h" />
-    <ClInclude Include="src\Brynhild\OpenGL\imguiGLFW.h" />
-    <ClInclude Include="src\Brynhild\OpenGL\imguiOpenGL.h" />
     <ClInclude Include="src\Brynhild\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Brynhild\Window.h" />
     <ClInclude Include="src\PreCompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Brynhild\Application.cpp" />
+    <ClCompile Include="src\Brynhild\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Brynhild\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Brynhild\Layer.cpp" />
     <ClCompile Include="src\Brynhild\LayerStack.cpp" />
     <ClCompile Include="src\Brynhild\Log.cpp" />
-    <ClCompile Include="src\Brynhild\OpenGL\imguiGLFW.cpp" />
-    <ClCompile Include="src\Brynhild\OpenGL\imguiOpenGL.cpp" />
     <ClCompile Include="src\Brynhild\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\PreCompiledHeader.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -196,8 +193,8 @@
     <ProjectReference Include="vendor\glad\glad.vcxproj">
       <Project>{DD62977C-C999-980D-7286-7E105E9C140F}</Project>
     </ProjectReference>
-    <ProjectReference Include="vendor\imgui\imgui.vcxproj">
-      <Project>{0098A80F-6CAC-D0C0-352E-7420A101CDF1}</Project>
+    <ProjectReference Include="vendor\imgui\ImGui.vcxproj">
+      <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

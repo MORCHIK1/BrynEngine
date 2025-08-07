@@ -10,6 +10,7 @@ IncludeDirectories = {}
 IncludeDirectories["GLFW"] = "Brynhild/vendor/GLFW/include"
 IncludeDirectories["glad"] = "Brynhild/vendor/glad/include"
 IncludeDirectories["imgui"] = "Brynhild/vendor/imgui"
+IncludeDirectories["glm"] = "Brynhild/vendor/glm"
 
 include "Brynhild/vendor/GLFW"
 include "Brynhild/vendor/glad"
@@ -32,7 +33,8 @@ project "Brynhild"
       "%{prj.name}/src", 
       "%{IncludeDirectories.GLFW}",
       "%{IncludeDirectories.glad}",
-      "%{IncludeDirectories.imgui}"
+      "%{IncludeDirectories.imgui}",
+      "%{IncludeDirectories.glm}"
     }
     links{
       "GLFW",
@@ -84,6 +86,8 @@ project "Sandbox"
     includedirs {
         "Brynhild/vendor/spdlog/include",
         "Brynhild/src",
+        "Brynhild/vendor",
+        "%{IncludeDirectories.glm}"
     }
 
     buildoptions "/utf-8"

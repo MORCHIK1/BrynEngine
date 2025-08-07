@@ -17,7 +17,6 @@ public:
   Sandbox() 
   {
     PushLayer(new ExampleLayer());
-    PushOverlay(new Brynhild::ImGuiLayer());
   }
 
   ~Sandbox() 
