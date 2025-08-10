@@ -1,5 +1,7 @@
 #include "PreCompiledHeader.h"
 #include "Application.h"
+#include "Brynhild/Input.h"
+#include "Brynhild/KeyCode.h"
 #include <GLFW/glfw3.h>
 
 namespace Brynhild{
@@ -27,6 +29,8 @@ namespace Brynhild{
     //We receive some event and create dispatcher with this event
     EventDispatcher dispatcher(event);
     //If we check this Event and it turns out to be WindowCloseEvent dispatcher calls OnWindowClosedEvent
+    // 
+    dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT(Application::OnKeyPressedEvent));
     dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT(Application::OnWindowClosedEvent));
 
     BRYN_CORE_INFO("Application OnEvent: {0}", event);
@@ -44,6 +48,15 @@ namespace Brynhild{
     return true;
   }
 
+  bool Application::OnKeyPressedEvent(KeyPressedEvent& event)
+  {
+    if (Input::IsKeyPressed(BRYN_KEY_ESCAPE)) {
+      m_Running = false;
+      return true;
+    }
+    return false;
+  }
+
   void Application::Run() {
     while (m_Running) {
       glClearColor(0.2f, 0.2f, 0.2f, 1.f);
@@ -58,6 +71,9 @@ namespace Brynhild{
         layer->OnImGuiDraw();
       }
       m_ImGuiLayer->End();
+
+      //auto [x, y] = Input::GetMousePos(); 
+      //BRYN_CORE_TRACE("INPUT CHECK: {0} {1}", x, y);
 
       m_Window->OnUpdate();
     }

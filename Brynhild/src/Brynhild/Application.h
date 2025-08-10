@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "Brynhild/Event/ApplicationEvent.h"
+#include "Brynhild/Event/KeyEvent.h"
 #include "Brynhild/LayerStack.h"
 #include "Event/EventLog.h"
 #include "ImGui/ImGuiLayer.h"
@@ -27,6 +28,7 @@ namespace Brynhild
     inline static Application& Get() { return *s_Instance; }
   private:
     bool OnWindowClosedEvent(WindowCloseEvent& event);
+    bool OnKeyPressedEvent(KeyPressedEvent& event);
 
     std::unique_ptr<Window> m_Window;
     ImGuiLayer* m_ImGuiLayer;

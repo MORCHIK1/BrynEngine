@@ -11,14 +11,14 @@ namespace Brynhild {
 
     EVENT_CLASS_CATEGORY(EventCategory::EventCategoryKeyboard | EventCategory::EventCategoryInput);
   protected:
-    KeyEvent(int keyCode) : m_KeyCode(keyCode) {}
+    KeyEvent(int keycode) : m_KeyCode(keycode) {}
 
     int m_KeyCode;
   };
 
   class BRYN_API KeyPressedEvent : public KeyEvent {
   public:
-    KeyPressedEvent(int keyCode, bool repeatCount) : m_RepeatCount(repeatCount), KeyEvent(keyCode){}
+    KeyPressedEvent(int keycode, bool repeatCount) : m_RepeatCount(repeatCount), KeyEvent(keycode){}
 
     inline bool GetRepeatCount() const { return m_RepeatCount; }
 

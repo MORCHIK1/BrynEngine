@@ -68,6 +68,8 @@
       <Filter>Brynhild</Filter>
     </ClInclude>
     <ClInclude Include="src\PreCompiledHeader.h" />
+    <ClInclude Include="src\Brynhild\Input.h" />
+    <ClInclude Include="src\Brynhild\Platform\Windows\WindowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Brynhild\Application.cpp">
@@ -92,5 +94,6 @@
       <Filter>Brynhild\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\PreCompiledHeader.cpp" />
+    <ClCompile Include="src\Brynhild\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>

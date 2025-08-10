@@ -165,11 +165,13 @@
     <ClInclude Include="src\Brynhild\Event\KeyEvent.h" />
     <ClInclude Include="src\Brynhild\Event\MouseEvent.h" />
     <ClInclude Include="src\Brynhild\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Brynhild\Input.h" />
     <ClInclude Include="src\Brynhild\KeyCode.h" />
     <ClInclude Include="src\Brynhild\Layer.h" />
     <ClInclude Include="src\Brynhild\LayerStack.h" />
     <ClInclude Include="src\Brynhild\Log.h" />
     <ClInclude Include="src\Brynhild\MouseButtonsCode.h" />
+    <ClInclude Include="src\Brynhild\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Brynhild\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Brynhild\Window.h" />
     <ClInclude Include="src\PreCompiledHeader.h" />
@@ -181,6 +183,7 @@
     <ClCompile Include="src\Brynhild\Layer.cpp" />
     <ClCompile Include="src\Brynhild\LayerStack.cpp" />
     <ClCompile Include="src\Brynhild\Log.cpp" />
+    <ClCompile Include="src\Brynhild\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Brynhild\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\PreCompiledHeader.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
