@@ -31,6 +31,7 @@ namespace Brynhild{
     //If we check this Event and it turns out to be WindowCloseEvent dispatcher calls OnWindowClosedEvent
     // 
     dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT(Application::OnKeyPressedEvent));
+
     dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT(Application::OnWindowClosedEvent));
 
     BRYN_CORE_INFO("Application OnEvent: {0}", event);
