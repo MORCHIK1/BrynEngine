@@ -1,11 +1,7 @@
 #pragma once
 
 #ifdef BRYN_PLATFORM_WINDOWS
-  #ifdef BRYN_BUILD_DLL
-    #define BRYN_API __declspec(dllexport)
-  #else
-    #define BRYN_API __declspec(dllimport)
-  #endif
+  #define BRYN_API 
 #else
   #error Brynhild only supports Windows!
 #endif
@@ -18,6 +14,6 @@
   #define BRYN_CORE_ASSERT(x, ...)  
 #endif
 
-#define FMT_HEADER_ONLY
+//#define FMT_HEADER_ONLY
 
 #define BIND_EVENT(fn) std::bind(&fn, this, std::placeholders::_1)

@@ -46,6 +46,9 @@
     <ClInclude Include="src\Brynhild\ImGui\ImGuiLayer.h">
       <Filter>Brynhild\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\Brynhild\Input.h">
+      <Filter>Brynhild</Filter>
+    </ClInclude>
     <ClInclude Include="src\Brynhild\KeyCode.h">
       <Filter>Brynhild</Filter>
     </ClInclude>
@@ -61,6 +64,9 @@
     <ClInclude Include="src\Brynhild\MouseButtonsCode.h">
       <Filter>Brynhild</Filter>
     </ClInclude>
+    <ClInclude Include="src\Brynhild\Platform\Windows\WindowsInput.h">
+      <Filter>Brynhild\Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\Brynhild\Platform\Windows\WindowsWindow.h">
       <Filter>Brynhild\Platform\Windows</Filter>
     </ClInclude>
@@ -68,8 +74,6 @@
       <Filter>Brynhild</Filter>
     </ClInclude>
     <ClInclude Include="src\PreCompiledHeader.h" />
-    <ClInclude Include="src\Brynhild\Input.h" />
-    <ClInclude Include="src\Brynhild\Platform\Windows\WindowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Brynhild\Application.cpp">
@@ -90,10 +94,12 @@
     <ClCompile Include="src\Brynhild\Log.cpp">
       <Filter>Brynhild</Filter>
     </ClCompile>
+    <ClCompile Include="src\Brynhild\Platform\Windows\WindowsInput.cpp">
+      <Filter>Brynhild\Platform\Windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\Brynhild\Platform\Windows\WindowsWindow.cpp">
       <Filter>Brynhild\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\PreCompiledHeader.cpp" />
-    <ClCompile Include="src\Brynhild\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>

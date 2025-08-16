@@ -2,7 +2,7 @@ workspace "Brynhild"
     architecture "x64"
     configurations {"Debug", "Release", "Dist"}
     startproject "Sandbox"
-    staticruntime "off"
+    staticruntime "on"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -18,8 +18,12 @@ include "Brynhild/vendor/imgui"
 
 project "Brynhild"
     location "Brynhild"
-    kind "SharedLib"
+    kind "StaticLib"
     language "C++"
+    cppdialect "C++17"
+
+    staticruntime "on"
+
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -41,35 +45,26 @@ project "Brynhild"
       "glad",
       "imgui",
       "opengl32.lib",
-      "user32.lib",
-      "gdi32.lib",
-      "shell32.lib"
     }
     buildoptions "/utf-8"
 
     filter "system:windows"
-        cppdialect "C++17"
         systemversion "latest"
-        
-        defines { "BRYN_PLATFORM_WINDOWS", "BRYN_BUILD_DLL" }
-        
-        postbuildcommands {
-            ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-        }
+        defines { "BRYN_PLATFORM_WINDOWS" }
 
     filter "configurations:Debug"
         defines { "BRYN_DEBUG", "BRYN_ENABLE_ASSERTS" }
-        symbols "On" 
+        symbols "on" 
         runtime "Debug"
     
     filter "configurations:Release"
         defines "BRYN_RELEASE"
-        optimize "On"
+        optimize "on"
         runtime "Release"
         
     filter "configurations:Dist"
         defines "BRYN_DIST"
-        optimize "On"
+        optimize "on"
         runtime "Release"
 
 
@@ -77,6 +72,10 @@ project "Sandbox"
     location "Sandbox"
     kind "ConsoleApp"
     language "C++"
+    cppdialect "C++17"
+
+    staticruntime "on"
+
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -93,22 +92,21 @@ project "Sandbox"
     buildoptions "/utf-8"
 
     filter "system:windows"
-        cppdialect "C++17"
         systemversion "latest"
         
         defines { "BRYN_PLATFORM_WINDOWS" }
 
     filter "configurations:Debug"
         defines "BRYN_DEBUG"
-        symbols "On"
+        symbols "on"
         runtime "Debug"
     
     filter "configurations:Release"
         defines "BRYN_RELEASE"
-        optimize "On"
+        optimize "on"
         runtime "Release"
         
     filter "configurations:Dist"
         defines "BRYN_DIST"
-        optimize "On"
+        optimize "on"
         runtime "Release"
