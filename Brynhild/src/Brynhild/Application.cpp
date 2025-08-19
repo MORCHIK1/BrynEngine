@@ -2,7 +2,9 @@
 #include "Application.h"
 #include "Brynhild/Input.h"
 #include "Brynhild/KeyCode.h"
-#include <GLFW/glfw3.h>
+
+#include <glad/glad.h>
+
 
 namespace Brynhild{
   Application* Application::s_Instance = nullptr;
@@ -18,6 +20,29 @@ namespace Brynhild{
     m_ImGuiLayer = new ImGuiLayer;
 
     PushOverlay(m_ImGuiLayer);
+
+    float vertices[3 * 3] = {
+      -0.5f, -0.5f, 0.0f,
+       0.5f, -0.5f, 0.0f,
+       0.0f,  0.5f, 0.0f
+    };
+
+    uint32_t indices[3] = {
+      0, 1, 2
+    };
+
+    glGenVertexArrays(1, &m_VAO);
+    glBindVertexArray(m_VAO);
+
+    m_VBO.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+    m_VBO->Bind();
+
+    m_EBO.reset(OGLElementBuffer::Create(indices, sizeof(indices)));
+    m_EBO->Bind();
+
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+  
   }
 
   Application::~Application()
@@ -33,8 +58,6 @@ namespace Brynhild{
     dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT(Application::OnKeyPressedEvent));
 
     dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT(Application::OnWindowClosedEvent));
-
-    BRYN_CORE_INFO("Application OnEvent: {0}", event);
 
     for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it) {
       (*it)->OnEvent(event);
@@ -62,6 +85,10 @@ namespace Brynhild{
     while (m_Running) {
       glClearColor(0.2f, 0.2f, 0.2f, 1.f);
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+      glBindVertexArray(m_VAO);
+
+      glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 
       for (Layer* layer : m_LayerStack) {
         layer->OnUpdate();

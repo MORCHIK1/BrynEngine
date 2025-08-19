@@ -2,11 +2,14 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
 #include "Brynhild/Event/EventLog.h"
 #include "Brynhild/Event/ApplicationEvent.h"
 #include "Brynhild/Event/MouseEvent.h"
 #include "Brynhild/Event/KeyEvent.h"
+
 #include "Brynhild/Window.h"
+#include "Brynhild/Renderer/GraphicsContext.h"
 
 namespace Brynhild {
   class WindowsWindow : public Window{
@@ -29,6 +32,7 @@ namespace Brynhild {
     virtual void Shutdown();
 
     GLFWwindow* m_Window;
+    GraphicsContext* m_Context;
 
     struct WindowData {
       std::string Title;

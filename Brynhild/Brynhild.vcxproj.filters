@@ -74,6 +74,11 @@
       <Filter>Brynhild</Filter>
     </ClInclude>
     <ClInclude Include="src\PreCompiledHeader.h" />
+    <ClInclude Include="src\Brynhild\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Brynhild\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Brynhild\Renderer\Buffer.h" />
+    <ClInclude Include="src\Brynhild\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Brynhild\Renderer\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Brynhild\Application.cpp">
@@ -101,5 +106,9 @@
       <Filter>Brynhild\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\PreCompiledHeader.cpp" />
+    <ClCompile Include="src\Brynhild\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Brynhild\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Brynhild\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Brynhild\Renderer\Renderer.cpp" />
   </ItemGroup>
 </Project>

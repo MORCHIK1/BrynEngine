@@ -146,6 +146,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Brynhild\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Brynhild\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Brynhild.h" />
     <ClInclude Include="src\Brynhild\Application.h" />
     <ClInclude Include="src\Brynhild\Core.h" />
@@ -164,10 +166,16 @@
     <ClInclude Include="src\Brynhild\MouseButtonsCode.h" />
     <ClInclude Include="src\Brynhild\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Brynhild\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="src\Brynhild\Renderer\Buffer.h" />
+    <ClInclude Include="src\Brynhild\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Brynhild\Renderer\Renderer.h" />
     <ClInclude Include="src\Brynhild\Window.h" />
     <ClInclude Include="src\PreCompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Brynhild\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Brynhild\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Brynhild\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Brynhild\Application.cpp" />
     <ClCompile Include="src\Brynhild\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Brynhild\ImGui\ImGuiLayer.cpp" />
@@ -176,6 +184,7 @@
     <ClCompile Include="src\Brynhild\Log.cpp" />
     <ClCompile Include="src\Brynhild\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Brynhild\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="src\Brynhild\Renderer\Renderer.cpp" />
     <ClCompile Include="src\PreCompiledHeader.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

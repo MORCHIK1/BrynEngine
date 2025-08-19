@@ -1,5 +1,6 @@
 #include "PreCompiledHeader.h"
 #include "WindowsWindow.h"
+#include "Brynhild/Platform/OpenGL/OpenGLContext.h"
 
 namespace Brynhild {
   static bool s_GLFWInitialized = false;
@@ -34,12 +35,9 @@ namespace Brynhild {
     }
 
     m_Window = glfwCreateWindow(static_cast<int>(m_Data.Width), static_cast<int>(m_Data.Height), m_Data.Title.c_str(), nullptr, nullptr);
-    glfwMakeContextCurrent(m_Window);
 
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-      BRYN_CORE_ERROR("Failed to initialize GLAD");
-    }
+    m_Context = new OpenGLContext(m_Window);
+    m_Context->Init();
 
     glfwSetWindowUserPointer(m_Window, &m_Data);
     SetVSync(true);
@@ -146,7 +144,7 @@ namespace Brynhild {
   void WindowsWindow::OnUpdate()
   {
     glfwPollEvents();
-    glfwSwapBuffers(m_Window);
+    m_Context->SwapBuffers();
   }
 
   void WindowsWindow::SetVSync(bool enabled)

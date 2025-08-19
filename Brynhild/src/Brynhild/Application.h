@@ -6,6 +6,7 @@
 #include "Brynhild/LayerStack.h"
 #include "Event/EventLog.h"
 #include "ImGui/ImGuiLayer.h"
+#include "Brynhild/Platform/OpenGL/OpenGLBuffer.h"
 #include "Window.h"
 
 namespace Brynhild 
@@ -31,6 +32,11 @@ namespace Brynhild
     bool OnKeyPressedEvent(KeyPressedEvent& event);
 
     std::unique_ptr<Window> m_Window;
+
+    std::unique_ptr<VertexBuffer> m_VBO;
+    std::unique_ptr<ElementBuffer> m_EBO;
+    unsigned int m_VAO;
+
     ImGuiLayer* m_ImGuiLayer;
     bool m_Running = true;
     LayerStack m_LayerStack;
