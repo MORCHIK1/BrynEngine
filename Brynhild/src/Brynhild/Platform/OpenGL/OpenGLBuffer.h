@@ -35,15 +35,19 @@ namespace Brynhild {
   class OGLVertexArray : public VertexArray
   {
   public:
-    OGLVertexArray(float* vertices, uint32_t count);
+    OGLVertexArray(BufferLayoutList vertices);
     ~OGLVertexArray();
 
     void Bind() override;
     void Unbind() override;
 
+    void SetLayout(BufferLayoutList list) override;
+    void EnableVertexAttrib() override;
+
   private:
     uint32_t m_ArrayID;
     uint32_t m_AttribArray = 0;
+    BufferLayoutList m_LayoutList;
   };
 }
  

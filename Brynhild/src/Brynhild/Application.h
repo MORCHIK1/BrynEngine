@@ -35,7 +35,7 @@ namespace Brynhild
 
     std::unique_ptr<VertexBuffer> m_VBO;
     std::unique_ptr<ElementBuffer> m_EBO;
-    unsigned int m_VAO;
+    std::unique_ptr<VertexArray> m_VAO;
 
     ImGuiLayer* m_ImGuiLayer;
     bool m_Running = true;

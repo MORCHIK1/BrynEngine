@@ -21,28 +21,31 @@ namespace Brynhild{
 
     PushOverlay(m_ImGuiLayer);
 
-    float vertices[3 * 3] = {
-      -0.5f, -0.5f, 0.0f,
-       0.5f, -0.5f, 0.0f,
-       0.0f,  0.5f, 0.0f
+    float vertices[3 * 7] = {
+      -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+       0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+       0.0f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f
     };
 
     uint32_t indices[3] = {
       0, 1, 2
     };
 
-    glGenVertexArrays(1, &m_VAO);
-    glBindVertexArray(m_VAO);
+    BufferLayoutList layoutList = {
+      { ShaderDataType::Float3 , "a_Position" },
+      { ShaderDataType::Float4 , "a_Color" },
+    };
+
+    m_VAO.reset(VertexArray::Create(layoutList));
+    m_VAO->Bind();
 
     m_VBO.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
     m_VBO->Bind();
 
-    m_EBO.reset(OGLElementBuffer::Create(indices, sizeof(indices)));
+    m_EBO.reset(OGLElementBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t))); //We pass the count and not just the size, so we know how many indices there are and easily get the count
     m_EBO->Bind();
 
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-  
+    m_VAO->EnableVertexAttrib();
   }
 
   Application::~Application()
@@ -86,7 +89,7 @@ namespace Brynhild{
       glClearColor(0.2f, 0.2f, 0.2f, 1.f);
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-      glBindVertexArray(m_VAO);
+      m_VAO->Bind();
 
       glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 

@@ -5,6 +5,24 @@
 #include <GLFW/glfw3.h>
 
 namespace Brynhild {
+  static GLenum ShaderDataTypeToOGLType(ShaderDataType type) {
+    switch (type) {
+    case ShaderDataType::Float:    { return GL_FLOAT; }
+    case ShaderDataType::Float2:   { return GL_FLOAT; }
+    case ShaderDataType::Float3:   { return GL_FLOAT; }
+    case ShaderDataType::Float4:   { return GL_FLOAT; }
+    case ShaderDataType::Float2x2: { return GL_FLOAT; }
+    case ShaderDataType::Float3x3: { return GL_FLOAT; }
+    case ShaderDataType::Float4x4: { return GL_FLOAT; }
+    case ShaderDataType::Int:      { return GL_INT; }
+    case ShaderDataType::Int2:     { return GL_INT; }
+    case ShaderDataType::Int3:     { return GL_INT; }
+    case ShaderDataType::Int4:     { return GL_INT; }
+    }
+
+    BRYN_CORE_ASSERT(false, "Type for OGLType doesn't exist!");
+    return 0;
+  }
 
   //--------------------------------VBO--------------------------------
   
@@ -51,17 +69,36 @@ namespace Brynhild {
 
   //--------------------------------VAO--------------------------------
 
-  OGLVertexArray::OGLVertexArray(float* vertices, uint32_t count)
+  OGLVertexArray::OGLVertexArray(BufferLayoutList layoutList) : m_LayoutList(layoutList)
   {
     glGenVertexArrays(1, &m_ArrayID);
+    glBindVertexArray(m_ArrayID);
   }
   OGLVertexArray::~OGLVertexArray()
   {
   }
   void OGLVertexArray::Bind()
   {
+    glBindVertexArray(m_ArrayID);
   }
   void OGLVertexArray::Unbind()
   {
+    glBindVertexArray(0);
+  }
+  void OGLVertexArray::SetLayout(BufferLayoutList list)
+  {
+    m_LayoutList = list;
+  }
+  void OGLVertexArray::EnableVertexAttrib()
+  {
+    for (const auto& layout : m_LayoutList) {
+      glEnableVertexAttribArray(m_AttribArray);
+      glVertexAttribPointer(m_AttribArray, GetComponentCount(layout.DataType),
+        ShaderDataTypeToOGLType(layout.DataType),
+        layout.Normalized,
+        m_LayoutList.GetStride(),
+        (void*)layout.Offset);
+      ++m_AttribArray;
+    }
   }
 }
