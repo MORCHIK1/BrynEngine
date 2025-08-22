@@ -6,7 +6,7 @@
 #include "Brynhild/Platform/OpenGL/OpenGLBuffer.h"
 
 namespace Brynhild {
-  VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size)
+  std::shared_ptr<VertexBuffer> VertexBuffer::Create(float* vertices, uint32_t size)
   {
     switch (Renderer::GetRendererAPI()) 
     {
@@ -14,7 +14,7 @@ namespace Brynhild {
       BRYN_CORE_ERROR("Render API None is not supported!");
       return nullptr;
     case RendererAPI::OpenGL:
-      return new OGLVertexBuffer(vertices, size);
+      return std::make_shared<OGLVertexBuffer>(vertices, size);
     }
 
     BRYN_CORE_ASSERT(false, "Wrong RendererAPI for VertexBuffer!");
@@ -34,7 +34,7 @@ namespace Brynhild {
   }
 
   
-  ElementBuffer* ElementBuffer::Create(uint32_t* indices, uint32_t size)
+  std::shared_ptr <ElementBuffer> ElementBuffer::Create(uint32_t* indices, uint32_t size)
   {
     switch (Renderer::GetRendererAPI())
     {
@@ -42,14 +42,14 @@ namespace Brynhild {
       BRYN_CORE_ERROR("Render API None is not supported!");
       return nullptr;
     case RendererAPI::OpenGL:
-      return new OGLElementBuffer(indices, size);
+      return std::make_shared<OGLElementBuffer>(indices, size);
     }
 
     BRYN_CORE_ASSERT(false, "Wrong RendererAPI for ElementBuffer!");
     return nullptr;
   }
   
-  VertexArray* VertexArray::Create(BufferLayoutList list)
+  VertexArray* VertexArray::Create()
   {
     switch (Renderer::GetRendererAPI())
     {
@@ -57,7 +57,7 @@ namespace Brynhild {
       BRYN_CORE_ERROR("Render API None is not supported!");
       return nullptr;
     case RendererAPI::OpenGL:
-      return new OGLVertexArray(list);
+      return new OGLVertexArray();
     }
 
     BRYN_CORE_ASSERT(false, "Wrong RendererAPI for VertexArray!");

@@ -5,7 +5,6 @@
 
 #include <glad/glad.h>
 
-
 namespace Brynhild{
   Application* Application::s_Instance = nullptr;
 
@@ -21,31 +20,34 @@ namespace Brynhild{
 
     PushOverlay(m_ImGuiLayer);
 
-    float vertices[3 * 7] = {
-      -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-       0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-       0.0f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f
-    };
+    m_VAO.reset(VertexArray::Create());
+    BRYN_CORE_ASSERT(m_VAO, "VAO is null!");
 
-    uint32_t indices[3] = {
-      0, 1, 2
+    m_VAO->Bind();
+
+    float vertices[3 * 3] = {
+      -0.5f, -0.5f, 0.0f,
+       0.5f, -0.5f, 0.0f,
+       0.0f,  0.5f, 0.0f
     };
 
     BufferLayoutList layoutList = {
       { ShaderDataType::Float3 , "a_Position" },
-      { ShaderDataType::Float4 , "a_Color" },
     };
 
-    m_VAO.reset(VertexArray::Create(layoutList));
-    m_VAO->Bind();
+    std::shared_ptr<VertexBuffer> VBO = VertexBuffer::Create(vertices, std::size(vertices) * sizeof(float));
+    BRYN_CORE_ASSERT(VBO, "VBO is null!");
 
-    m_VBO.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-    m_VBO->Bind();
+    VBO->SetLayout(layoutList);
+    m_VAO->AddVertexBuffer(VBO);
+    
+    uint32_t indices[3] = {
+      0, 1, 2
+    };
 
-    m_EBO.reset(OGLElementBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t))); //We pass the count and not just the size, so we know how many indices there are and easily get the count
-    m_EBO->Bind();
+    std::shared_ptr<ElementBuffer> EBO = ElementBuffer::Create(indices, std::size(indices)); // We pass the count and not just the size, so we know how many indices there are and easily get the count
 
-    m_VAO->EnableVertexAttrib();
+    m_VAO->AddElementBuffer(EBO);
   }
 
   Application::~Application()
@@ -89,9 +91,12 @@ namespace Brynhild{
       glClearColor(0.2f, 0.2f, 0.2f, 1.f);
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-      m_VAO->Bind();
 
-      glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+      //glUseProgram(m_Program);
+      
+      m_VAO->Bind();
+      //glDrawArrays(GL_TRIANGLES, 0, 3);
+      glDrawElements(GL_TRIANGLES, m_VAO->GetElementBuffer()->GetCount(), GL_UNSIGNED_INT, 0);
 
       for (Layer* layer : m_LayerStack) {
         layer->OnUpdate();

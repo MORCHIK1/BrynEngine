@@ -11,8 +11,12 @@ namespace Brynhild {
 
     void Bind() override;
     void Unbind() override;
-    
+
+    void SetLayout(BufferLayoutList list) override;
+    const BufferLayoutList& GetLayout() const override;
+
   private:
+    BufferLayoutList m_LayoutList;
     uint32_t m_VertexID;
   };
 
@@ -35,19 +39,23 @@ namespace Brynhild {
   class OGLVertexArray : public VertexArray
   {
   public:
-    OGLVertexArray(BufferLayoutList vertices);
+    OGLVertexArray();
     ~OGLVertexArray();
 
     void Bind() override;
     void Unbind() override;
 
-    void SetLayout(BufferLayoutList list) override;
-    void EnableVertexAttrib() override;
+    void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuf) override;
+    void AddElementBuffer(const std::shared_ptr<ElementBuffer>& elementBuf) override;
+
+    const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffer() override;
+    const std::shared_ptr<ElementBuffer>& GetElementBuffer() override;
 
   private:
+    std::vector<std::shared_ptr<VertexBuffer>> m_VertexBufList;
+    std::shared_ptr<ElementBuffer> m_ElementBuf;
     uint32_t m_ArrayID;
     uint32_t m_AttribArray = 0;
-    BufferLayoutList m_LayoutList;
   };
 }
  

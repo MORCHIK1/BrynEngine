@@ -11,10 +11,12 @@ IncludeDirectories["GLFW"] = "Brynhild/vendor/GLFW/include"
 IncludeDirectories["glad"] = "Brynhild/vendor/glad/include"
 IncludeDirectories["imgui"] = "Brynhild/vendor/imgui"
 IncludeDirectories["glm"] = "Brynhild/vendor/glm"
+--IncludeDirectories["slang"] = "Brynhild/vendor/slang/include"
 
 include "Brynhild/vendor/GLFW"
 include "Brynhild/vendor/glad"
 include "Brynhild/vendor/imgui"
+--include "Brynhild/vendor/slang"
 
 project "Brynhild"
     location "Brynhild"
@@ -38,12 +40,14 @@ project "Brynhild"
       "%{IncludeDirectories.GLFW}",
       "%{IncludeDirectories.glad}",
       "%{IncludeDirectories.imgui}",
-      "%{IncludeDirectories.glm}"
+      "%{IncludeDirectories.glm}",
+      --"%{IncludeDirectories.slang}",
     }
     links{
       "GLFW",
       "glad",
       "imgui",
+      --"slang",
       "opengl32.lib",
     }
     buildoptions "/utf-8"

@@ -13,8 +13,14 @@
     <Filter Include="Brynhild\Platform">
       <UniqueIdentifier>{55B3C62A-C1C9-C4C0-0A41-50E276969548}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Brynhild\Platform\OpenGL">
+      <UniqueIdentifier>{E9AA17EC-D5CF-666C-FE1A-4CFCEA9E658A}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Brynhild\Platform\Windows">
       <UniqueIdentifier>{8FE228C7-FBA4-5C51-4455-EBDDB056352F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brynhild\Renderer">
+      <UniqueIdentifier>{A7BAA305-13D1-A19B-5C48-2DBDC89D7223}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,21 +70,37 @@
     <ClInclude Include="src\Brynhild\MouseButtonsCode.h">
       <Filter>Brynhild</Filter>
     </ClInclude>
+    <ClInclude Include="src\Brynhild\Platform\OpenGL\OpenGLBuffer.h">
+      <Filter>Brynhild\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Brynhild\Platform\OpenGL\OpenGLContext.h">
+      <Filter>Brynhild\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Brynhild\Platform\OpenGL\OpenGLShader.h">
+      <Filter>Brynhild\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Brynhild\Platform\Windows\WindowsInput.h">
       <Filter>Brynhild\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Brynhild\Platform\Windows\WindowsWindow.h">
       <Filter>Brynhild\Platform\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="src\Brynhild\Renderer\Buffer.h">
+      <Filter>Brynhild\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Brynhild\Renderer\GraphicsContext.h">
+      <Filter>Brynhild\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Brynhild\Renderer\Renderer.h">
+      <Filter>Brynhild\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Brynhild\Renderer\Shader.h">
+      <Filter>Brynhild\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Brynhild\Window.h">
       <Filter>Brynhild</Filter>
     </ClInclude>
     <ClInclude Include="src\PreCompiledHeader.h" />
-    <ClInclude Include="src\Brynhild\Renderer\GraphicsContext.h" />
-    <ClInclude Include="src\Brynhild\Platform\OpenGL\OpenGLContext.h" />
-    <ClInclude Include="src\Brynhild\Renderer\Buffer.h" />
-    <ClInclude Include="src\Brynhild\Platform\OpenGL\OpenGLBuffer.h" />
-    <ClInclude Include="src\Brynhild\Renderer\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Brynhild\Application.cpp">
@@ -99,16 +121,30 @@
     <ClCompile Include="src\Brynhild\Log.cpp">
       <Filter>Brynhild</Filter>
     </ClCompile>
+    <ClCompile Include="src\Brynhild\Platform\OpenGL\OpenGLBuffer.cpp">
+      <Filter>Brynhild\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Brynhild\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>Brynhild\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Brynhild\Platform\OpenGL\OpenGLShader.cpp">
+      <Filter>Brynhild\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Brynhild\Platform\Windows\WindowsInput.cpp">
       <Filter>Brynhild\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Brynhild\Platform\Windows\WindowsWindow.cpp">
       <Filter>Brynhild\Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\Brynhild\Renderer\Buffer.cpp">
+      <Filter>Brynhild\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Brynhild\Renderer\Renderer.cpp">
+      <Filter>Brynhild\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Brynhild\Renderer\Shader.cpp">
+      <Filter>Brynhild\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\PreCompiledHeader.cpp" />
-    <ClCompile Include="src\Brynhild\Platform\OpenGL\OpenGLContext.cpp" />
-    <ClCompile Include="src\Brynhild\Renderer\Buffer.cpp" />
-    <ClCompile Include="src\Brynhild\Platform\OpenGL\OpenGLBuffer.cpp" />
-    <ClCompile Include="src\Brynhild\Renderer\Renderer.cpp" />
   </ItemGroup>
 </Project>

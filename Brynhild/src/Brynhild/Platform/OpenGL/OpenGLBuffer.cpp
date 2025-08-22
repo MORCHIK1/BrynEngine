@@ -36,6 +36,16 @@ namespace Brynhild {
     glDeleteBuffers(1, &m_VertexID);
   }
 
+  void OGLVertexBuffer::SetLayout(BufferLayoutList list)
+  {
+    m_LayoutList = list;
+  }
+
+  const BufferLayoutList& OGLVertexBuffer::GetLayout() const
+  {
+    return m_LayoutList;
+  }
+
   void OGLVertexBuffer::Bind()
   {
     glBindBuffer(GL_ARRAY_BUFFER, m_VertexID);
@@ -69,13 +79,13 @@ namespace Brynhild {
 
   //--------------------------------VAO--------------------------------
 
-  OGLVertexArray::OGLVertexArray(BufferLayoutList layoutList) : m_LayoutList(layoutList)
+  OGLVertexArray::OGLVertexArray()
   {
     glGenVertexArrays(1, &m_ArrayID);
-    glBindVertexArray(m_ArrayID);
   }
   OGLVertexArray::~OGLVertexArray()
   {
+    glDeleteVertexArrays(1, &m_ArrayID);
   }
   void OGLVertexArray::Bind()
   {
@@ -85,20 +95,47 @@ namespace Brynhild {
   {
     glBindVertexArray(0);
   }
-  void OGLVertexArray::SetLayout(BufferLayoutList list)
+
+  void OGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuf)
   {
-    m_LayoutList = list;
-  }
-  void OGLVertexArray::EnableVertexAttrib()
-  {
-    for (const auto& layout : m_LayoutList) {
+    BRYN_CORE_ASSERT(vertexBuf->GetLayout().GetElements().size(), "The buffer layout list is empty!");
+
+    glBindVertexArray(m_ArrayID);
+    vertexBuf->Bind();
+
+    const auto& layoutList = vertexBuf->GetLayout();
+
+    for (const auto& layout : layoutList) {
       glEnableVertexAttribArray(m_AttribArray);
       glVertexAttribPointer(m_AttribArray, GetComponentCount(layout.DataType),
         ShaderDataTypeToOGLType(layout.DataType),
-        layout.Normalized,
-        m_LayoutList.GetStride(),
+        layout.Normalized ? GL_TRUE : GL_FALSE,
+        layoutList.GetStride(),
         (void*)layout.Offset);
       ++m_AttribArray;
     }
+
+    m_VertexBufList.push_back(vertexBuf);
   }
+
+  void OGLVertexArray::AddElementBuffer(const std::shared_ptr<ElementBuffer>& elementBuf)
+  {
+    BRYN_CORE_ASSERT(elementBuf->GetCount(), "The element list is empty!");
+
+    glBindVertexArray(m_ArrayID);
+    elementBuf->Bind();
+
+    m_ElementBuf = elementBuf;
+  }
+
+  const std::vector<std::shared_ptr<VertexBuffer>>& OGLVertexArray::GetVertexBuffer()
+  {
+    return m_VertexBufList;
+  }
+
+  const std::shared_ptr<ElementBuffer>& OGLVertexArray::GetElementBuffer()
+  {
+    return m_ElementBuf;
+  }
+
 }

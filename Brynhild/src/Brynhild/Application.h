@@ -33,8 +33,6 @@ namespace Brynhild
 
     std::unique_ptr<Window> m_Window;
 
-    std::unique_ptr<VertexBuffer> m_VBO;
-    std::unique_ptr<ElementBuffer> m_EBO;
     std::unique_ptr<VertexArray> m_VAO;
 
     ImGuiLayer* m_ImGuiLayer;

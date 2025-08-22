@@ -73,17 +73,23 @@ namespace Brynhild {
       CalculateStrideAndOffset();
     };
 
-    std::initializer_list<BufferLayoutElement>::iterator begin() { return m_LayoutElements.begin(); }
-    std::initializer_list<BufferLayoutElement>::iterator end() { return m_LayoutElements.end(); }
+    std::vector<BufferLayoutElement>::iterator begin() { return m_LayoutElements.begin(); }
+    std::vector<BufferLayoutElement>::iterator end() { return m_LayoutElements.end(); }
+
+    std::vector<BufferLayoutElement>::const_iterator begin() const { return m_LayoutElements.begin(); }
+    std::vector<BufferLayoutElement>::const_iterator end() const { return m_LayoutElements.end(); }
 
     inline uint32_t GetStride() const { return m_Stride; }
+    std::vector<BufferLayoutElement> GetElements() const { return m_LayoutElements; }
 
   private:
     void CalculateStrideAndOffset();
 
     uint32_t m_Stride;
-    std::initializer_list<BufferLayoutElement> m_LayoutElements;
+    std::vector<BufferLayoutElement> m_LayoutElements;
   };
+
+  //--------------------------------------------------------------------------VERTEXBUFFER
 
   class VertexBuffer
   {
@@ -92,23 +98,14 @@ namespace Brynhild {
 
     virtual void Bind() = 0;
     virtual void Unbind() = 0;
-    
-    static VertexBuffer* Create(float* vertices, uint32_t size);
-  };
-
-  class VertexArray
-  {
-  public:
-    virtual ~VertexArray() {};
-
-    virtual void Bind() = 0;
-    virtual void Unbind() = 0;
 
     virtual void SetLayout(BufferLayoutList list) = 0;
-    virtual void EnableVertexAttrib() = 0;
+    virtual const BufferLayoutList& GetLayout() const = 0;
 
-    static VertexArray* Create(BufferLayoutList list);
+    static std::shared_ptr<VertexBuffer> Create(float* vertices, uint32_t size);
   };
+
+  //--------------------------------------------------------------------------ELEMENTBUFFER
 
   class ElementBuffer
   {
@@ -120,8 +117,26 @@ namespace Brynhild {
 
     virtual uint32_t GetCount() = 0; //Get count of how many indices there are
 
-    static ElementBuffer* Create(uint32_t* indices, uint32_t size);
+    static std::shared_ptr<ElementBuffer> Create(uint32_t* indices, uint32_t size);
   };
 
+  //--------------------------------------------------------------------------VERTEXARRAY
+
+  class VertexArray
+  {
+  public:
+    virtual ~VertexArray() {};
+
+    virtual void Bind() = 0;
+    virtual void Unbind() = 0;
+
+    virtual void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuf) = 0;
+    virtual void AddElementBuffer(const std::shared_ptr<ElementBuffer>& elementBuf) = 0;
+
+    virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffer() = 0;
+    virtual const std::shared_ptr<ElementBuffer>& GetElementBuffer() = 0;
+
+    static VertexArray* Create();
+  };
 }
 
