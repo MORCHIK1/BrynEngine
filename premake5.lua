@@ -11,12 +11,11 @@ IncludeDirectories["GLFW"] = "Brynhild/vendor/GLFW/include"
 IncludeDirectories["glad"] = "Brynhild/vendor/glad/include"
 IncludeDirectories["imgui"] = "Brynhild/vendor/imgui"
 IncludeDirectories["glm"] = "Brynhild/vendor/glm"
---IncludeDirectories["slang"] = "Brynhild/vendor/slang/include"
+IncludeDirectories["slang"] = "Brynhild/vendor/slang/include"
 
 include "Brynhild/vendor/GLFW"
 include "Brynhild/vendor/glad"
 include "Brynhild/vendor/imgui"
---include "Brynhild/vendor/slang"
 
 project "Brynhild"
     location "Brynhild"
@@ -41,14 +40,19 @@ project "Brynhild"
       "%{IncludeDirectories.glad}",
       "%{IncludeDirectories.imgui}",
       "%{IncludeDirectories.glm}",
-      --"%{IncludeDirectories.slang}",
+      "%{IncludeDirectories.slang}",
     }
+
+    libdirs{
+        "Brynhild/vendor/slang/lib"
+    }
+
     links{
       "GLFW",
       "glad",
       "imgui",
-      --"slang",
       "opengl32.lib",
+      "slang.lib"
     }
     buildoptions "/utf-8"
 
@@ -90,7 +94,20 @@ project "Sandbox"
         "Brynhild/vendor/spdlog/include",
         "Brynhild/src",
         "Brynhild/vendor",
-        "%{IncludeDirectories.glm}"
+        "%{IncludeDirectories.glm}",
+        "%{IncludeDirectories.slang}"
+    }
+
+    libdirs{
+        "Brynhild/vendor/slang/lib"
+    }
+
+    links{
+      "slang.lib"
+    }
+
+    postbuildcommands {
+        "{COPYFILE} %{wks.location}Brynhild/vendor/slang/bin/slang.dll %{wks.location}bin/" .. outputdir .. "/%{prj.name}"
     }
 
     buildoptions "/utf-8"

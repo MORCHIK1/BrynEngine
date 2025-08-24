@@ -5,6 +5,8 @@
 
 #include <glad/glad.h>
 
+#include <slang.h>
+
 namespace Brynhild{
   Application* Application::s_Instance = nullptr;
 
@@ -48,6 +50,10 @@ namespace Brynhild{
     std::shared_ptr<ElementBuffer> EBO = ElementBuffer::Create(indices, std::size(indices)); // We pass the count and not just the size, so we know how many indices there are and easily get the count
 
     m_VAO->AddElementBuffer(EBO);
+
+    m_Shader.reset(Shader::Create("Shader"));
+
+    m_Shader->Bind();
   }
 
   Application::~Application()

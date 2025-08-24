@@ -6,7 +6,9 @@
 #include "Brynhild/LayerStack.h"
 #include "Event/EventLog.h"
 #include "ImGui/ImGuiLayer.h"
-#include "Brynhild/Platform/OpenGL/OpenGLBuffer.h"
+//#include "Brynhild/Platform/OpenGL/OpenGLBuffer.h"
+#include "Brynhild/Renderer/Buffer.h"
+#include "Brynhild/Renderer/Shader.h"
 #include "Window.h"
 
 namespace Brynhild 
@@ -34,6 +36,7 @@ namespace Brynhild
     std::unique_ptr<Window> m_Window;
 
     std::unique_ptr<VertexArray> m_VAO;
+    std::unique_ptr<Shader> m_Shader;
 
     ImGuiLayer* m_ImGuiLayer;
     bool m_Running = true;
