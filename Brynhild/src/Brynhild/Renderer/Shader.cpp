@@ -12,10 +12,10 @@ namespace Brynhild {
   Shader* Shader::Create(const char* shaderName)
   {
     switch (Renderer::GetRendererAPI()) {
-    case RendererAPI::None:
-      BRYN_CORE_ERROR("No shader for rendererAPI None!");
+    case RendererAPI::API::None:
+      BRYN_CORE_ERROR("No shader for API None!");
       return nullptr;
-    case RendererAPI::OpenGL:
+    case RendererAPI::API::OpenGL:
       BRYN_CORE_INFO("Returning GLSL shader...");
       auto [vertex, fragment] = CreateGLSLShader(shaderName);
       return new OpenGLShader(vertex.c_str(), fragment.c_str());

@@ -31,12 +31,11 @@ namespace Brynhild
     inline static Application& Get() { return *s_Instance; }
   private:
     bool OnWindowClosedEvent(WindowCloseEvent& event);
-    bool OnKeyPressedEvent(KeyPressedEvent& event);
 
     std::unique_ptr<Window> m_Window;
 
-    std::unique_ptr<VertexArray> m_VAO;
-    std::unique_ptr<Shader> m_Shader;
+    std::shared_ptr<VertexArray> m_VAO;
+    std::shared_ptr<Shader> m_Shader;
 
     ImGuiLayer* m_ImGuiLayer;
     bool m_Running = true;

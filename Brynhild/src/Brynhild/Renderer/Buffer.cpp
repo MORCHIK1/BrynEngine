@@ -10,10 +10,10 @@ namespace Brynhild {
   {
     switch (Renderer::GetRendererAPI()) 
     {
-    case RendererAPI::None:
+    case RendererAPI::API::None:
       BRYN_CORE_ERROR("Render API None is not supported!");
       return nullptr;
-    case RendererAPI::OpenGL:
+    case RendererAPI::API::OpenGL:
       return std::make_shared<OGLVertexBuffer>(vertices, size);
     }
 
@@ -38,10 +38,10 @@ namespace Brynhild {
   {
     switch (Renderer::GetRendererAPI())
     {
-    case RendererAPI::None:
+    case RendererAPI::API::None:
       BRYN_CORE_ERROR("Render API None is not supported!");
       return nullptr;
-    case RendererAPI::OpenGL:
+    case RendererAPI::API::OpenGL:
       return std::make_shared<OGLElementBuffer>(indices, size);
     }
 
@@ -53,10 +53,10 @@ namespace Brynhild {
   {
     switch (Renderer::GetRendererAPI())
     {
-    case RendererAPI::None:
+    case RendererAPI::API::None:
       BRYN_CORE_ERROR("Render API None is not supported!");
       return nullptr;
-    case RendererAPI::OpenGL:
+    case RendererAPI::API::OpenGL:
       return new OGLVertexArray();
     }
 

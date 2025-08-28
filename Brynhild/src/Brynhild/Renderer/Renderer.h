@@ -1,17 +1,22 @@
 #pragma once
 
+#include "Brynhild/Renderer/Buffer.h"
+#include "Brynhild/Renderer/Shader.h"
+#include "RenderManager.h"
+
 namespace Brynhild {
-  enum class RendererAPI {
-    None = 0,
-    OpenGL = 1
-  };
+
   
   class Renderer
   {
   public:
-    inline static RendererAPI GetRendererAPI() { return s_RendererAPI; }
+    inline static RendererAPI::API GetRendererAPI() { return RendererAPI::GetAPI(); }
+
+    static void BeginPlay();
+    static void EndPlay();
+
+    static void Submit(const std::shared_ptr<VertexArray>& vertexArray, const std::shared_ptr<Shader>& shader);
   private:
-    static RendererAPI s_RendererAPI;
   };
 
 }

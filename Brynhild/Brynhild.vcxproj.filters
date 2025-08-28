@@ -101,6 +101,9 @@
       <Filter>Brynhild</Filter>
     </ClInclude>
     <ClInclude Include="src\PreCompiledHeader.h" />
+    <ClInclude Include="src\Brynhild\Renderer\RenderManager.h" />
+    <ClInclude Include="src\Brynhild\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\Brynhild\Platform\OpenGL\OpenGLRendererAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Brynhild\Application.cpp">
@@ -146,5 +149,8 @@
       <Filter>Brynhild\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\PreCompiledHeader.cpp" />
+    <ClCompile Include="src\Brynhild\Renderer\RenderManager.cpp" />
+    <ClCompile Include="src\Brynhild\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\Brynhild\Platform\OpenGL\OpenGLRendererAPI.cpp" />
   </ItemGroup>
 </Project>
