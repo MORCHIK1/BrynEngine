@@ -76,6 +76,9 @@
     <ClInclude Include="src\Brynhild\Platform\OpenGL\OpenGLContext.h">
       <Filter>Brynhild\Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Brynhild\Platform\OpenGL\OpenGLRendererAPI.h">
+      <Filter>Brynhild\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Brynhild\Platform\OpenGL\OpenGLShader.h">
       <Filter>Brynhild\Platform\OpenGL</Filter>
     </ClInclude>
@@ -88,10 +91,19 @@
     <ClInclude Include="src\Brynhild\Renderer\Buffer.h">
       <Filter>Brynhild\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Brynhild\Renderer\Camera.h">
+      <Filter>Brynhild\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Brynhild\Renderer\GraphicsContext.h">
       <Filter>Brynhild\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Brynhild\Renderer\RenderManager.h">
+      <Filter>Brynhild\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Brynhild\Renderer\Renderer.h">
+      <Filter>Brynhild\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Brynhild\Renderer\RendererAPI.h">
       <Filter>Brynhild\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Brynhild\Renderer\Shader.h">
@@ -101,9 +113,6 @@
       <Filter>Brynhild</Filter>
     </ClInclude>
     <ClInclude Include="src\PreCompiledHeader.h" />
-    <ClInclude Include="src\Brynhild\Renderer\RenderManager.h" />
-    <ClInclude Include="src\Brynhild\Renderer\RendererAPI.h" />
-    <ClInclude Include="src\Brynhild\Platform\OpenGL\OpenGLRendererAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Brynhild\Application.cpp">
@@ -130,6 +139,9 @@
     <ClCompile Include="src\Brynhild\Platform\OpenGL\OpenGLContext.cpp">
       <Filter>Brynhild\Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Brynhild\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>Brynhild\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Brynhild\Platform\OpenGL\OpenGLShader.cpp">
       <Filter>Brynhild\Platform\OpenGL</Filter>
     </ClCompile>
@@ -142,15 +154,21 @@
     <ClCompile Include="src\Brynhild\Renderer\Buffer.cpp">
       <Filter>Brynhild\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Brynhild\Renderer\Camera.cpp">
+      <Filter>Brynhild\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Brynhild\Renderer\RenderManager.cpp">
+      <Filter>Brynhild\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Brynhild\Renderer\Renderer.cpp">
+      <Filter>Brynhild\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Brynhild\Renderer\RendererAPI.cpp">
       <Filter>Brynhild\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Brynhild\Renderer\Shader.cpp">
       <Filter>Brynhild\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\PreCompiledHeader.cpp" />
-    <ClCompile Include="src\Brynhild\Renderer\RenderManager.cpp" />
-    <ClCompile Include="src\Brynhild\Renderer\RendererAPI.cpp" />
-    <ClCompile Include="src\Brynhild\Platform\OpenGL\OpenGLRendererAPI.cpp" />
   </ItemGroup>
 </Project>

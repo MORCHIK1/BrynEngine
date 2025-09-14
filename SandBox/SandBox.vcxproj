@@ -159,9 +159,6 @@
       <Project>{E1C95CCE-CD96-B7D9-F6AF-A581E2DBEC67}</Project>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="assets\shaders\Shader.slang" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

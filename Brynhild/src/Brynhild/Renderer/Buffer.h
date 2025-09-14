@@ -138,5 +138,17 @@ namespace Brynhild {
 
     static VertexArray* Create();
   };
+
+  class UniformBuffer
+  {
+  public:
+    virtual ~UniformBuffer() {};
+
+    virtual void Bind() = 0;
+    virtual void Unbind() = 0;
+    virtual void UpdateUBO(const std::vector<char>& constantBufferData) = 0;
+
+    static std::shared_ptr<UniformBuffer> Create(const std::vector<char>& constantBufferData, uint32_t layerIndex);
+  };
 }
 

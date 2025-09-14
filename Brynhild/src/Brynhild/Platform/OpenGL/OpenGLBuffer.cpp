@@ -138,4 +138,43 @@ namespace Brynhild {
     return m_ElementBuf;
   }
 
+  //--------------------------------UBO--------------------------------
+
+  OGLUniformBuffer::OGLUniformBuffer(const std::vector<char>& constantBufferData, uint32_t layerIndex = 0) : m_Layout(layerIndex)
+  {
+    glGenBuffers(1, &m_UniformID);
+    glBindBuffer(GL_UNIFORM_BUFFER, m_UniformID);
+    glBufferData(GL_UNIFORM_BUFFER, constantBufferData.size(), constantBufferData.data(), GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+    glBindBufferBase(GL_UNIFORM_BUFFER, m_Layout, m_UniformID);
+  }
+
+  OGLUniformBuffer::~OGLUniformBuffer()
+  {
+    glDeleteBuffers(1, &m_UniformID);
+  }
+
+  void OGLUniformBuffer::Bind()
+  {
+    glBindBuffer(GL_UNIFORM_BUFFER, m_UniformID);
+  }
+
+  void OGLUniformBuffer::Unbind()
+  {
+    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+  }
+
+  void OGLUniformBuffer::UpdateUBO(const std::vector<char>& constantBufferData)
+  {
+    if (m_UniformID == 0) {
+      BRYN_CORE_ERROR("UBO WASN'T CREATED! ");
+      return;
+    }
+    glBindBuffer(GL_UNIFORM_BUFFER, m_UniformID);
+
+    glBufferSubData(GL_UNIFORM_BUFFER, 0, constantBufferData.size(), constantBufferData.data());
+
+    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+  }
+
 }

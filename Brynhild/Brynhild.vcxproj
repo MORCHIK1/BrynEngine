@@ -172,10 +172,11 @@
     <ClInclude Include="src\Brynhild\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Brynhild\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Brynhild\Renderer\Buffer.h" />
+    <ClInclude Include="src\Brynhild\Renderer\Camera.h" />
     <ClInclude Include="src\Brynhild\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Brynhild\Renderer\RenderManager.h" />
     <ClInclude Include="src\Brynhild\Renderer\Renderer.h" />
     <ClInclude Include="src\Brynhild\Renderer\RendererAPI.h" />
-    <ClInclude Include="src\Brynhild\Renderer\RenderManager.h" />
     <ClInclude Include="src\Brynhild\Renderer\Shader.h" />
     <ClInclude Include="src\Brynhild\Window.h" />
     <ClInclude Include="src\PreCompiledHeader.h" />
@@ -194,9 +195,10 @@
     <ClCompile Include="src\Brynhild\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Brynhild\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Brynhild\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Brynhild\Renderer\Camera.cpp" />
+    <ClCompile Include="src\Brynhild\Renderer\RenderManager.cpp" />
     <ClCompile Include="src\Brynhild\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Brynhild\Renderer\RendererAPI.cpp" />
-    <ClCompile Include="src\Brynhild\Renderer\RenderManager.cpp" />
     <ClCompile Include="src\Brynhild\Renderer\Shader.cpp" />
     <ClCompile Include="src\PreCompiledHeader.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

@@ -9,7 +9,6 @@ namespace Brynhild {
     OpenGLShader(const char* vertexShader, const char* fragmentShader);
     ~OpenGLShader();
 
-
     void Bind() override;
     void Unbind() override;
   private:

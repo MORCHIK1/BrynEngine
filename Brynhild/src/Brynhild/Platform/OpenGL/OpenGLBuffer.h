@@ -57,5 +57,21 @@ namespace Brynhild {
     uint32_t m_ArrayID;
     uint32_t m_AttribArray = 0;
   };
+
+  class OGLUniformBuffer : public UniformBuffer
+  {
+  public:
+    OGLUniformBuffer(const std::vector<char>& constantBufferData, uint32_t layerIndex);
+    ~OGLUniformBuffer();
+
+    void Bind() override;
+    void Unbind() override;
+
+    void UpdateUBO(const std::vector<char>& constantBufferData) override;
+
+  private:
+    uint32_t m_Layout;
+    uint32_t m_UniformID;
+  };
 }
  

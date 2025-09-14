@@ -4,11 +4,11 @@
 #include "Brynhild/Renderer/Renderer.h"
 #include "Brynhild/Platform/OpenGL/OpenGLShader.h"
 
+Slang::ComPtr<slang::IComponentType> Brynhild::Shader::m_LinkedProgram;
+slang::ProgramLayout* Brynhild::Shader::m_ProgramLayout = nullptr;
+
 namespace Brynhild {
-
-
-  Shader::Shader() {
-  }
+  Shader::Shader() {}
   Shader* Shader::Create(const char* shaderName)
   {
     switch (Renderer::GetRendererAPI()) {
@@ -89,33 +89,32 @@ namespace Brynhild {
         composedProgram.writeRef(),
         diagnosticsBlob.writeRef());
     }
-
-    Slang::ComPtr<slang::IComponentType> linkedProgram;
     {
       Slang::ComPtr<slang::IBlob> diagnosticsBlob;
       SlangResult result = composedProgram->link(
-        linkedProgram.writeRef(),
+        m_LinkedProgram.writeRef(),
         diagnosticsBlob.writeRef());
     }
+
+    m_ProgramLayout = m_LinkedProgram->getLayout();
 
     Slang::ComPtr<slang::IBlob> VertexCodeBlob;
     Slang::ComPtr<slang::IBlob> FragmentCodeBlob;
     {
       Slang::ComPtr<slang::IBlob> diagnosticsBlob;
       // Get code for the first entry point (index 0, our vertex shader)
-      SlangResult result = linkedProgram->getEntryPointCode(
+      SlangResult result = m_LinkedProgram->getEntryPointCode(
         0, // entryPointIndex
         0, // targetIndex
         VertexCodeBlob.writeRef(),
         diagnosticsBlob.writeRef());
 
       // Get code for the second entry point (index 1, our fragment shader)
-      result = linkedProgram->getEntryPointCode(
+      result = m_LinkedProgram->getEntryPointCode(
         1, // entryPointIndex
         0, // targetIndex
         FragmentCodeBlob.writeRef(),
         diagnosticsBlob.writeRef());
-
     }
 
     std::string vertexShaderSourceGLSL = static_cast<const char*>(VertexCodeBlob->getBufferPointer());
@@ -123,4 +122,82 @@ namespace Brynhild {
 
     return { vertexShaderSourceGLSL, fragmentShaderSourceGLSL };
   }
+
+  slang::VariableLayoutReflection* findGlobalParameter(slang::ProgramLayout* programLayout, const char* name)
+  {
+    SlangInt paramCount = programLayout->getParameterCount();
+
+    for (SlangInt i = 0; i < paramCount; ++i)
+    {
+      slang::VariableLayoutReflection* param = programLayout->getParameterByIndex(i);
+      if (strcmp(param->getName(), name) == 0)
+      {
+        return param;
+      }
+    }
+    return nullptr;
+  }
+
+  slang::VariableLayoutReflection* findField(slang::TypeLayoutReflection* structLayout, const char* name)
+  {
+    SlangUInt fieldCount = structLayout->getFieldCount();
+    for (SlangUInt i = 0; i < fieldCount; ++i)
+    {
+      slang::VariableLayoutReflection* field = structLayout->getFieldByIndex(i);
+      if (strcmp(field->getName(), name) == 0)
+      {
+        return field;
+      }
+    }
+    return nullptr;
+  }
+
+  // --- Variadic Template Implementation ---
+
+  // This is the recursive "worker" function.
+  // Base case: When there are no more arguments to process, we stop.
+  void setBufferFields(
+    char* cpuBufferData,
+    slang::TypeLayoutReflection* structLayout)
+  {
+    // All done!
+  }
+
+  // Recursive step: Process one name-value pair and recurse on the rest.
+  template<typename T, typename... Rest>
+  void setBufferFields(
+    char* cpuBufferData,
+    slang::TypeLayoutReflection* structLayout,
+    const char* fieldName,
+    const T& value,
+    Rest... rest)
+  {
+    // Find the field with the given name inside the struct.
+    slang::VariableLayoutReflection* fieldLayout = findField(structLayout, fieldName);
+
+    if (fieldLayout)
+    {
+      // Get the byte offset where this field's data should be placed.
+      size_t offset = fieldLayout->getOffset();
+
+      Optional but recommended: Check if the size matches.
+      size_t requiredSize = fieldLayout->getTypeLayout()->getSize();
+      if (sizeof(T) != requiredSize) {
+          std::cerr << "Warning: Size mismatch for field '" << fieldName << "'. "
+                    << "Provided: " << sizeof(T) << ", Shader expects: " << requiredSize << std::endl;
+      }
+
+      // Copy the value's bytes to the correct position in the buffer.
+      memcpy(cpuBufferData + offset, &value, sizeof(T));
+    }
+    else
+    {
+      // It's good practice to warn if a field name wasn't found.
+      std::cerr << "Warning: Field '" << fieldName << "' not found in constant buffer struct." << std::endl;
+    }
+
+    // Recursively call the function with the remaining arguments.
+    setBufferFields(cpuBufferData, structLayout, rest...);
+  }
+
 }
