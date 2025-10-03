@@ -14,4 +14,6 @@
   #define BRYN_CORE_ASSERT(x, ...)  
 #endif
 
+//#define FMT_HEADER_ONLY
+
 #define BIND_EVENT(fn) std::bind(&fn, this, std::placeholders::_1)
