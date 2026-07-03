@@ -25,9 +25,9 @@ namespace Brynhild {
     m_Stride = 0;
     uint32_t previousOffset = 0;
 
-    for (BufferLayoutElement el : m_LayoutElements) {
-      m_Stride += ShaderDataTypeSize(el.DataType);
+    for (BufferLayoutElement& el : m_LayoutElements) {
       el.Offset = previousOffset;
+      m_Stride += ShaderDataTypeSize(el.DataType);
       previousOffset += ShaderDataTypeSize(el.DataType);
     }
     BRYN_CORE_INFO("STRIDE: {0}", m_Stride);

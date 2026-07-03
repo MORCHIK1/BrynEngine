@@ -89,6 +89,7 @@ project "Sandbox"
 
     files { "%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp" }
     links { "Brynhild" }
+    debugdir "%{wks.location}/%{prj.name}"
 
     includedirs {
         "Brynhild/vendor/spdlog/include",
